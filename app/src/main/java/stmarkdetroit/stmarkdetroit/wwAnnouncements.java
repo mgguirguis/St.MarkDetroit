@@ -17,7 +17,7 @@ public class wwAnnouncements extends WebViewClient {
             try
             {
                 URL urlObj = new URL(url);
-                if (urlObj.getHost().endsWith("http://wpc.511C.edgecastcdn.net/00511C/common-player-files/jw_player-5.6-licensed/player.swf"))  {
+                if (urlObj.getHost().endsWith("stmarkmi.org")&& urlObj.getPath().startsWith("") )  {
                     view.loadUrl(url);
                 }
                 else

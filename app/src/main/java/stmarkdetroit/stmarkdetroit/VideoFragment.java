@@ -14,8 +14,6 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 
-
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -59,6 +57,7 @@ public class VideoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -79,8 +78,11 @@ public class VideoFragment extends Fragment {
     {
         VideoView stream1 = (VideoView)getActivity().findViewById(R.id.stream1);
         MediaController mc = new MediaController(getActivity());
-        final String LINK1 = "http://techslides.com/demos/sample-videos/small.mp4";
+        final String LINK1 = "http://wpc.5A40.edgecastcdn.net/805A40/live/stmarkmi/myStream/playlist.m3u8";
         stream1.setVideoURI(Uri.parse(LINK1));
+        mc.getForegroundGravity();
+
+        stream1.setFitsSystemWindows(true);
         stream1.start();
         mc.setMediaPlayer(stream1);
         stream1.getBufferPercentage();
@@ -94,6 +96,7 @@ public class VideoFragment extends Fragment {
 
 
     }
+
 
     @Override
     public void onAttach(Activity activity) {

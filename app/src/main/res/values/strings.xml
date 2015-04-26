@@ -31,4 +31,5 @@
     <string name="title_activity_video_page">VideoPage</string>
     <string name="title_activity_surface_view_test">SurfaceViewTest</string>
     <string name="enter_fullscreen" />
+    <string name="title_activity_full_screen_toogle">FullScreenToogle</string>
 </resources>

@@ -22,14 +22,6 @@
             android:name=".VideoPage"
             android:label="@string/title_activity_video_page" >
         </activity>
-        <activity
-            android:name=".VideoPage2"
-            android:label="@string/title_activity_video_page2" >
-        </activity>
-        <activity
-            android:name=".FullScreenToogle"
-            android:label="@string/title_activity_full_screen_toogle" >
-        </activity>
     </application>
 
 </manifest>
