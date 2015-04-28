@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity
 
-        implements stmarkdetroit.stmarkdetroit.NavigationDrawerFragment.NavigationDrawerCallbacks, stmarkdetroit.stmarkdetroit.VideoFragment.OnFragmentInteractionListener,HomeFragment.OnFragmentInteractionListener {
+        implements stmarkdetroit.stmarkdetroit.NavigationDrawerFragment.NavigationDrawerCallbacks, stmarkdetroit.stmarkdetroit.VideoFragment.OnFragmentInteractionListener,HomeFragment.OnFragmentInteractionListener, CalendarFragment.OnFragmentInteractionListener {
     private String[] pages;
 
     /**
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity
         }
         else if (position == 2) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, HomeFragment.newInstance())
+                    .replace(R.id.container, CalendarFragment.newInstance())
                     .commit();
         }
 
