@@ -61,6 +61,7 @@ public class MainActivity extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, stmarkdetroit.stmarkdetroit.VideoFragment.newInstance())
                     .commit();
+
         }
         else if (position == 2) {
             fragmentManager.beginTransaction()

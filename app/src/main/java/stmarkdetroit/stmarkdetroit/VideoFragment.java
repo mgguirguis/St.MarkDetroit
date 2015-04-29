@@ -2,6 +2,8 @@ package stmarkdetroit.stmarkdetroit;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,10 +25,63 @@ import android.widget.VideoView;
  * create an instance of this fragment.
  */
 public class VideoFragment extends Fragment {
+    MediaController mc;
+    VideoView stream1;
+    ProgressDialog progressDialog;
+    int position = 0;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     //private static final String ARG_PARAM1 = "param1";
     //private static final String ARG_PARAM2 = "param2";
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void onViewCreated(View view, Bundle SavedInstanceState)
+    {
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(true);
+
+        stream1 = (VideoView)getActivity().findViewById(R.id.stream1);
+        mc = new MediaController(getActivity());
+        final String LINK1 = "https://redirector.googlevideo.com/videoplayback?requiressl=yes&shardbypass=yes&cmbypass=yes&id=ff2dae37cc712aad&itag=18&source=picasa&cmo=secure_transport%3Dyes&ip=0.0.0.0&ipbits=0&expire=1432917884&sparams=requiressl,shardbypass,cmbypass,id,itag,source,ip,ipbits,expire&signature=9BA8E8DFEF5A56A42CC517B4F25BC1BFA76CCADE.D39E1996A21B22645FD29620F885E1F604615D37&key=lh1";
+        stream1.setVideoURI(Uri.parse(LINK1));
+        stream1.start();
+        mc.setMediaPlayer(stream1);
+        stream1.getBufferPercentage();
+        stream1.canSeekBackward();
+        stream1.canSeekBackward();
+        stream1.setMediaController(mc);
+        mc.setAnchorView(stream1);
+        stream1.getBufferPercentage();
+        stream1.requestFocus();
+        while (stream1.isPlaying()==true)
+        {
+            progressDialog.dismiss();
+            progressDialog.hide();
+        }
+        if (stream1.isPlaying() && progressDialog.isShowing())
+        {
+            progressDialog.hide();
+        }
+
+
+         stream1.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+             public void onPrepared(MediaPlayer mediaPlayer) {
+                 progressDialog.dismiss();
+                 stream1.seekTo(position);
+                 if (position == 0) {
+                     stream1.start();
+                 } else {
+                     stream1.pause();
+                 }
+             }
+         });
+
+
+
+
+
+    }
 
     // TODO: Rename and change types of parameters
     //private String mParam1;
@@ -58,44 +113,22 @@ public class VideoFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_video, container, false);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-   // public void onButtonPressed(Uri uri) {
-        //if (mListener != null) {
-       //     mListener.onFragmentInteraction(uri);
-     //   }
-   // }
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void onViewCreated(View view, Bundle SavedInstanceState)
-    {
-        VideoView stream1 = (VideoView)getActivity().findViewById(R.id.stream1);
-        MediaController mc = new MediaController(getActivity());
-        final String LINK1 = "http://wpc.5A40.edgecastcdn.net/805A40/live/stmarkmi/myStream/playlist.m3u8";
-        stream1.setVideoURI(Uri.parse(LINK1));
-        mc.getForegroundGravity();
-
-        stream1.setFitsSystemWindows(true);
-        stream1.start();
-        mc.setMediaPlayer(stream1);
-        stream1.getBufferPercentage();
-        stream1.canSeekBackward();
-        stream1.canSeekBackward();
-        stream1.setMediaController(mc);
-        mc.setAnchorView(stream1);
-        mc.getFitsSystemWindows();
-        stream1.getBufferPercentage();
-        stream1.onScreenStateChanged(1);
-
-
-    }
+    // public void onButtonPressed(Uri uri) {
+    //if (mListener != null) {
+    //     mListener.onFragmentInteraction(uri);
+    //   }
+    // }
 
 
     @Override
@@ -112,6 +145,7 @@ public class VideoFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
     }
 
     @Override
@@ -135,6 +169,7 @@ public class VideoFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
