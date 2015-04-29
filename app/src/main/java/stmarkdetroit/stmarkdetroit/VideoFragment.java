@@ -43,7 +43,7 @@ public class VideoFragment extends Fragment {
 
         stream1 = (VideoView)getActivity().findViewById(R.id.stream1);
         mc = new MediaController(getActivity());
-        final String LINK1 = "https://redirector.googlevideo.com/videoplayback?requiressl=yes&shardbypass=yes&cmbypass=yes&id=ff2dae37cc712aad&itag=18&source=picasa&cmo=secure_transport%3Dyes&ip=0.0.0.0&ipbits=0&expire=1432917884&sparams=requiressl,shardbypass,cmbypass,id,itag,source,ip,ipbits,expire&signature=9BA8E8DFEF5A56A42CC517B4F25BC1BFA76CCADE.D39E1996A21B22645FD29620F885E1F604615D37&key=lh1";
+        final String LINK1 = "http://wpc.5A40.edgecastcdn.net/805A40/live/stmarkmi/myStream/playlist.m3u8";
         stream1.setVideoURI(Uri.parse(LINK1));
         stream1.start();
         mc.setMediaPlayer(stream1);
